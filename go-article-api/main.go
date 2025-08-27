@@ -14,7 +14,11 @@ func main() {
 	config.DB.AutoMigrate(&models.Post{})
 
 	r.GET("/posts", controllers.GetPosts)
+	r.GET("/posts/:id", controllers.FindPost)
+	r.GET("/posts/paginate", controllers.GetLimitedOffsetedPost)
 	r.POST("/posts", controllers.CreatePost)
+	r.PUT("/posts/:id", controllers.EditPost)
+	r.DELETE("/posts/:id", controllers.DeletePost)
 
 	r.Run(":8081")
 }
