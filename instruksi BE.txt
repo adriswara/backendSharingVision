@@ -1,0 +1,23 @@
+Langkah langkah menjalankan
+
+run cmd pada directory \backendSharingVision lalu
+
+1.irm get.scoop.sh | iex
+
+2.scoop install migrate 
+
+3.migrate create -ext sql -dir migrations create_posts_table
+
+4.migrate -path ./migrations -database "mysql://root:@tcp(localhost:3306)/article" up
+
+5.Run cmd / powershell pada folder go-article-api
+
+6.run file .go dengan command go run main.go
+
+7.test menggunakan postman dengan akses 
+
+import pada postman file sharevision.postman_collection.json
+
+atau
+
+https://.postman.co/workspace/My-Workspace~e68d716c-f27b-403e-89d1-92909bc3eabf/request/30286025-d1438f39-dffc-44cc-bd3f-0e819ef4597b?action=share&creator=30286025&ctx=documentation
