@@ -5,11 +5,13 @@ import (
 	"go-article-api/controllers"
 	"go-article-api/models"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	r := gin.Default()
+	r.Use(cors.Default()) // <-- Add this line
 	config.ConnectDatabase()
 	config.DB.AutoMigrate(&models.Post{})
 
