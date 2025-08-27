@@ -56,6 +56,27 @@ func CreatePost(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+
+	// Validation
+	if len(post.Title) < 20 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Title must be at least 20 characters"})
+		return
+	}
+	if len(post.Content) < 200 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Content must be at least 200 characters"})
+		return
+	}
+	if len(post.Category) < 3 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Category must be at least 3 characters"})
+		return
+	}
+	validStatus := map[string]bool{"Published": true, "Draft": true, "Trashed": true}
+	if !validStatus[post.Status] {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Status must be Published, Draft, or Trashed"})
+		return
+	}
+	//
+
 	config.DB.Create(&post)
 	c.JSON(http.StatusCreated, post)
 }
@@ -73,6 +94,26 @@ func EditPost(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+
+	// Validation
+	if len(post.Title) < 20 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Title must be at least 20 characters"})
+		return
+	}
+	if len(post.Content) < 200 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Content must be at least 200 characters"})
+		return
+	}
+	if len(post.Category) < 3 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Category must be at least 3 characters"})
+		return
+	}
+	validStatus := map[string]bool{"Published": true, "Draft": true, "Trashed": true}
+	if !validStatus[post.Status] {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Status must be Published, Draft, or Trashed"})
+		return
+	}
+	//
 
 	config.DB.Save(&post)
 	c.JSON(http.StatusOK, post)
