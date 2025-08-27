@@ -20,7 +20,7 @@ func main() {
 	r.GET("/posts/paginate", controllers.GetLimitedOffsetedPost)
 	r.POST("/posts", controllers.CreatePost)
 	r.PUT("/posts/:id", controllers.EditPost)
-	r.DELETE("/posts/:id", controllers.DeletePost)
+	r.PUT("/posts/delete/:id", controllers.DeletePost)
 
 	r.Run(":8081")
 }

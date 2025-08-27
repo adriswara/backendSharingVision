@@ -128,6 +128,8 @@ func DeletePost(c *gin.Context) {
 		return
 	}
 
-	config.DB.Delete(&post)
-	c.JSON(http.StatusOK, gin.H{"message": "Post deleted"})
+	// soft delete menggunakan status "Trashed"
+	post.Status = "Trashed"
+	config.DB.Save(&post)
+	c.JSON(http.StatusOK, gin.H{"message": "Post status changed to Trashed"})
 }
